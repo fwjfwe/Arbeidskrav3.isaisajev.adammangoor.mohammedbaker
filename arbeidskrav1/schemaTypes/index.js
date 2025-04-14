@@ -1,4 +1,4 @@
-import medlem from '../schemas/medlem'
+import medlem from '../schema/medlem'
 
 export const schemaTypes = [medlem]
 
