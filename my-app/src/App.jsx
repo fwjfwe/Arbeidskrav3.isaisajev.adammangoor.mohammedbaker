@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { client } from "./sanityClient";
 import "./App.css";
 import { Link } from "react-router-dom";
+import PageTitle from "./components/PageTitle";
 
 function App() {
   const [medlemmer, setMedlemmer] = useState([]);
