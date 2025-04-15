@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { client } from "./sanityClient";
 import "./App.css";
 import { Link } from "react-router-dom";
-import PageTitle from "./components/PageTitle";
+import Header from './components/header';
 
 function App() {
   const [medlemmer, setMedlemmer] = useState([]);
@@ -21,28 +21,18 @@ function App() {
 
   return (
     <div>
-      <header>
-        <h1>Gruppe 5</h1>
-        <nav>
-          <a href="/">Hjem</a>
-          {medlemmer.map((m) => (
-  <Link key={m._id} to={`/profil/${m._id}`}>{m.navn}</Link>
-))}
-
-        </nav>
-      </header>
-
+      <Header medlemmer={medlemmer} />
       <main>
         <h2>Gruppemedlemmer</h2>
         <div className="kort-container">
-    {medlemmer.map((m) => (
-      <Link to={`/profil/${m._id}`} key={m._id} className="kort">
-        <img src={m.bildeUrl} alt={m.navn} />
-        <h3>{m.navn}</h3>
-        <p>{m.epost}</p>
-      </Link>
-    ))}
-  </div>
+          {medlemmer.map((m) => (
+            <Link to={`/profil/${m._id}`} key={m._id} className="kort">
+              <img src={m.bildeUrl} alt={m.navn} />
+              <h3>{m.navn}</h3>
+              <p>{m.epost}</p>
+            </Link>
+          ))}
+        </div>
       </main>
     </div>
   );
