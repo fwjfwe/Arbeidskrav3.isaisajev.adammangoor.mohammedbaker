@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { client } from "./sanityClient";
+import "./App.css";
+import { Link } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [medlemmer, setMedlemmer] = useState([]);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "medlem"]{
+        _id,
+        navn,
+        epost,
+        "bildeUrl": bilde.asset->url
+      }`)
+      .then((data) => setMedlemmer(data))
+      .catch(console.error);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <header>
+        <h1>Gruppe 5</h1>
+        <nav>
+          <a href="/">Hjem</a>
+          {medlemmer.map((m) => (
+  <Link key={m._id} to={`/profil/${m._id}`}>{m.navn}</Link>
+))}
+
+        </nav>
+      </header>
+
+      <main>
+        <h2>Gruppemedlemmer</h2>
+        <div className="kort-container">
+    {medlemmer.map((m) => (
+      <Link to={`/profil/${m._id}`} key={m._id} className="kort">
+        <img src={m.bildeUrl} alt={m.navn} />
+        <h3>{m.navn}</h3>
+        <p>{m.epost}</p>
+      </Link>
+    ))}
+  </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
