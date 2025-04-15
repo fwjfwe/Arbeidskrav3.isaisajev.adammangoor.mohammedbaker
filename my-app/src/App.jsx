@@ -3,6 +3,8 @@ import { client } from "./sanityClient";
 import "./App.css";
 import { Link } from "react-router-dom";
 import Header from './components/header';
+import PageTitle from "./components/PageTitle";
+
 
 function App() {
   const [medlemmer, setMedlemmer] = useState([]);
@@ -21,6 +23,7 @@ function App() {
 
   return (
     <div>
+      <PageTitle title="23"/>
       <Header medlemmer={medlemmer} />
       <main>
         <h2>Gruppemedlemmer</h2>
