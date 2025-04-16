@@ -17,7 +17,10 @@ function Profil() {
           "bildeUrl": bilde.asset->url,
           interesser,
           bio,
-          logg
+          logg[] {
+            beskrivelse,
+            createdAt
+          }
         }`,
         { id }
       )
@@ -39,7 +42,6 @@ function Profil() {
       <Header medlemmer={medlemmer} />
       <section className="ProfilBoks">
         <img className="ProfilBilde" src={person.bildeUrl} alt={person.navn} />
-
         <section className="ProfilBio">
           <h1 className="ProfilNavn">{person.navn}</h1>
           <p className="Epost">E-post: {person.epost}</p>
@@ -54,20 +56,14 @@ function Profil() {
         </section>
       </section>
 
-      {/* Logg Section */}
       <section className="Logg">
-        <h3 className="BioOver">Loggføringer</h3>
-        <ul>
+        <h3 className="LoggOver">Loggføringer</h3>
+        <ul className="LoggUl">
           {person.logg?.map((logg, idx) => {
-            const loggDate = new Date(logg.dato);
-            const dateString = loggDate.toLocaleDateString("no-NO");
-            const timeString = loggDate.toLocaleTimeString("no-NO");
-
+            const loggDato = logg.createdAt ? new Date(logg.createdAt).toLocaleString("no-NO") : "Ukjent dato";
             return (
-              <li key={logg._key || idx}>
-                {/* Displaying Name, Date, Time, and Log Description */}
-                <strong>{person.navn}</strong> - 
-                <span>{dateString} {timeString}</span>: {logg.beskrivelse}
+              <li className="LoggLi" key={logg._key || idx}>
+                <strong>{loggDato}</strong>: {logg.beskrivelse}
               </li>
             );
           })}

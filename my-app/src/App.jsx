@@ -9,18 +9,20 @@ function App() {
   const [medlemmer, setMedlemmer] = useState([]);
 
   useEffect(() => {
-    client.fetch(`*[_type == "medlem"]{
-      _id,
-      navn,
-      epost,
-      "bildeUrl": bilde.asset->url,
-      logg[] {
-        beskrivelse,
-        dato
-      }
-    }`)
+    client
+      .fetch(`*[_type == "medlem"]{
+        _id,
+        navn,
+        epost,
+        "bildeUrl": bilde.asset->url,
+        logg[] {
+          _key,
+          beskrivelse,
+          createdAt
+        }
+      }`)
       .then((data) => {
-        console.log("DATA FRA SANITY:", data); // 🔍 Se her i konsollen!
+        console.log("DATA FRA SANITY:", data);
         setMedlemmer(data);
       })
       .catch(console.error);
@@ -43,24 +45,24 @@ function App() {
         </div>
 
         <h2>Samlet logg for gruppa</h2>
-        <ul>
+        <ul calssName="LoggUl">
           {medlemmer
-            .flatMap((m) => 
-              m.logg?.map(logg => ({
-                ...logg,  // Spread the log properties
-                navn: m.navn,  // Add the member's name to the log entry
-                dato: new Date(logg.dato),  // Convert the date string into a Date object for formatting
+            .flatMap((m) =>
+              (m.logg || []).map((entry) => ({
+                ...entry,
+                navn: m.navn,
               }))
             )
-            .filter((entry) => entry?.dato && entry?.beskrivelse)
-            .sort((a, b) => b.dato - a.dato)  // Sort logs by date
-            .map((entry, idx) => (
-              <li key={idx}>
-                {/* Display the name, formatted date, time, and log description */}
-                <strong>{entry.navn}</strong> - 
-                <span>{entry.dato.toLocaleDateString("no-NO")} {entry.dato.toLocaleTimeString("no-NO")}</span>: {entry.beskrivelse}
-              </li>
-            ))}
+            .filter((entry) => entry.createdAt && entry.beskrivelse)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((entry, idx) => {
+              const loggDato = new Date(entry.createdAt).toLocaleString("no-NO");
+              return (
+                <li className="LoggLi" key={entry._key || idx}>
+                  <strong>{entry.navn}</strong> – {loggDato}: {entry.beskrivelse}
+                </li>
+              );
+            })}
         </ul>
       </main>
     </div>
