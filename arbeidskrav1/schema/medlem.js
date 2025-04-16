@@ -20,10 +20,28 @@ export default {
       { name: 'bio', title: 'Biografi', type: 'text' },
       {
         name: 'logg',
-        title: 'Loggføringer',
-        type: 'array',
-        of: [{ type: 'string' }],
-      },
-    ],
-  };
-  
+      title: 'Loggføringer',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'beskrivelse',
+              title: 'Beskrivelse',
+              type: 'text',
+              validation: Rule => Rule.required(),
+            },
+            {
+              name: 'dato',
+              title: 'Dato ført inn',
+              type: 'datetime',
+              initialValue: () => new Date().toISOString(),
+              validation: Rule => Rule.required(),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};

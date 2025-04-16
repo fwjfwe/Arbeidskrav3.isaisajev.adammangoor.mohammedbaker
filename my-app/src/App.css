@@ -1,26 +1,130 @@
 header {
-  background: #333;
-  color: white;
-  padding: 1rem;
+  background-color: #3c1a7d;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+header h1{
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
 nav a {
-  margin-right: 1rem;
-  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  color: #ffffff;
   text-decoration: none;
+  position: relative;
+  padding: 0 8px;
 }
+
+main h2 {
+  display: grid;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+
 .kort-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: center;
+  margin-top: 40px;
 }
+
 .kort {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
+  height: 280px;
+  border: 1px solid #3c1a7d;
+  padding: 10px;
+  margin: 1rem;
+  text-decoration: none;
 }
+
+.kort h3{
+  color: black;
+  font-size: 15px;
+}
+
+.kort p{
+  font-size: 15px;
+  margin-top: -10px;
+}
+
 .kort img {
   width: 100%;
-  border-radius: 50%;
+  height: 80%;
+  object-fit: cover;
+  background-color: #d3d3d3;
+  margin-bottom: -10px;
+  max-width: 200px;
+  min-width: 200px;
 }
+
+.ProfilBilde{
+  width: 50rem;
+  height: 30rem;
+}
+
+.ProfilNavn{
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.ProfilBoks{
+  display: flex;
+  padding: 60px;
+  background-color: #ffffff;
+}
+
+.Logg{
+  padding: 20px;
+}
+
+.ProfilBio{
+  width: 800px;
+}
+
+.Epost{
+  font-size: 20px;
+}
+
+.ProfilNavn, .Epost, .BioOver, .BioTekst{
+  padding-left: 25px;
+}
+
+.BioOver{
+  margin-bottom: 0px;
+  font-size: 25px;
+}
+
+.BioTekst{
+  font-size: 20px;
+  width: 80%;
+}
+
+.Interesser{
+  list-style-type: square;
+  font-size: 20px;
+}
+
+
+
