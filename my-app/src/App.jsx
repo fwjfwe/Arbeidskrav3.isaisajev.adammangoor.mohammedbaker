@@ -41,7 +41,7 @@ function App() {
             </Link>
           ))}
         </div>
-
+          
         <h2>Samlet logg for gruppa</h2>
         <ul className="LoggUl">
           {medlemmer
@@ -68,3 +68,4 @@ function App() {
 }
 
 export default App;
+/*bruh*/
