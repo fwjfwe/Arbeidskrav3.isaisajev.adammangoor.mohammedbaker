@@ -43,7 +43,7 @@ function App() {
         </div>
 
         <h2>Samlet logg for gruppa</h2>
-        <ul>
+        <ul className="LoggUl">
           {medlemmer
             .flatMap((m) => 
               m.logg?.map(logg => ({
@@ -55,7 +55,7 @@ function App() {
             .filter((entry) => entry?.dato && entry?.beskrivelse)
             .sort((a, b) => b.dato - a.dato)  // Sort logs by date
             .map((entry, idx) => (
-              <li key={idx}>
+              <li className="LoggLi" key={idx}>
                 {/* Display the name, formatted date, time, and log description */}
                 <strong>{entry.navn}</strong> - 
                 <span>{entry.dato.toLocaleDateString("no-NO")} {entry.dato.toLocaleTimeString("no-NO")}</span>: {entry.beskrivelse}

@@ -57,14 +57,14 @@ function Profil() {
       {/* Logg Section */}
       <section className="Logg">
         <h3 className="BioOver">Loggføringer</h3>
-        <ul>
+        <ul className="LoggUl">
           {person.logg?.map((logg, idx) => {
             const loggDate = new Date(logg.dato);
             const dateString = loggDate.toLocaleDateString("no-NO");
             const timeString = loggDate.toLocaleTimeString("no-NO");
 
             return (
-              <li key={logg._key || idx}>
+              <li className="LoggLi" key={logg._key || idx}>
                 {/* Displaying Name, Date, Time, and Log Description */}
                 <strong>{person.navn}</strong> - 
                 <span>{dateString} {timeString}</span>: {logg.beskrivelse}
