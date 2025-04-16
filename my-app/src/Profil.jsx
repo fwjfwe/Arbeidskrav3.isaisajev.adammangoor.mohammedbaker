@@ -56,7 +56,7 @@ function Profil() {
 
       {/* Logg Section */}
       <section className="Logg">
-        <h3 className="BioOver">Loggføringer</h3>
+        <h3 className="LoggOver">Loggføringer</h3>
         <ul className="LoggUl">
           {person.logg?.map((logg, idx) => {
             const loggDate = new Date(logg.dato);
