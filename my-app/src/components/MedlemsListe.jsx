@@ -5,7 +5,7 @@ function MedlemsListe({ medlemmer = [] }) {
   return (
     <section>
       <h2>Gruppemedlemmer</h2>
-      <div className="kort-container">
+      <article className="kort-container">
         {medlemmer.map((m) => {
           if (!m.slug?.current) return null;
           return (
@@ -16,7 +16,7 @@ function MedlemsListe({ medlemmer = [] }) {
             </Link>
           );
         })}
-      </div>
+      </article>
     </section>
   );
 }

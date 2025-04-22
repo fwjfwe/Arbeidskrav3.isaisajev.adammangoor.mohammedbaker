@@ -14,7 +14,7 @@ function SamletLogg({ medlemmer }) {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   return (
-    <div>
+    <section>
       <h2>Samlet logg for gruppa</h2>
       <ul className="LoggUl">
         {samletLogg.map((entry, idx) => {
@@ -26,7 +26,7 @@ function SamletLogg({ medlemmer }) {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 }
 

@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <section>
       <PageTitle title="23" />
       <Header medlemmer={medlemmer} />
 
@@ -41,7 +41,7 @@ function App() {
         <MedlemsListe medlemmer={medlemmer} /> 
         <SamletLogg medlemmer={medlemmer} />
       </main>
-    </div>
+    </section>
   );
 }
 
