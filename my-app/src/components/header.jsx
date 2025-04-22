@@ -7,7 +7,7 @@ export default function Header({ medlemmer = [] }) {
       <nav>
         <Link to="/">Hjem</Link>
         {medlemmer.map((m) => (
-          <Link key={m._id} to={`/profil/${m._id}`}>
+          <Link key={m._id} to={`/profil/${m.slug.current}`}>
             {m.navn}
           </Link>
         ))}

@@ -6,6 +6,16 @@ export default {
     { name: 'navn', title: 'Navn', type: 'string' },
     { name: 'epost', title: 'E-post', type: 'string' },
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'navn', // Automatisk generer slug basert på navn
+        maxLength: 96,
+      },
+      validation: Rule => Rule.required(),
+    },
+    {
       name: 'bilde',
       title: 'Bilde',
       type: 'image',
@@ -36,7 +46,7 @@ export default {
               name: 'createdAt',
               title: 'Dato',
               type: 'datetime',
-              initialValue: () => new Date().toISOString(), // Set default value for createdAt
+              initialValue: () => new Date().toISOString(),
               validation: Rule => Rule.required(),
             }
           ],

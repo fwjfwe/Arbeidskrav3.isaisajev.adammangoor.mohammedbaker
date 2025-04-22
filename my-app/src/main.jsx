@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/profil/:id" element={<Profil />} />
+        <Route path="/profil/:slug" element={<Profil />} /> 
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,36 +1,43 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { client } from "./sanityClient";
 import Header from './components/header';
+import LoggListe from './components/LoggListe'; // 
 
 function Profil() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [person, setPerson] = useState(null);
   const [medlemmer, setMedlemmer] = useState([]);
 
   useEffect(() => {
+    if (!slug) return;
+
     client
       .fetch(
-        `*[_type == "medlem" && _id == $id][0]{
+        `*[_type == "medlem" && slug.current == $slug][0]{
           navn,
           epost,
           "bildeUrl": bilde.asset->url,
           interesser,
           bio,
           logg[] {
+            _key,
             beskrivelse,
             createdAt
           }
         }`,
-        { id }
+        { slug }
       )
-      .then((data) => setPerson(data))
+      .then((data) => {
+        console.log("Profildata:", data);
+        setPerson(data);
+      })
       .catch(console.error);
-  }, [id]);
+  }, [slug]);
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "medlem"]{ _id, navn }`)
+      .fetch(`*[_type == "medlem"]{ _id, navn, slug }`)
       .then((data) => setMedlemmer(data))
       .catch(console.error);
   }, []);
@@ -56,19 +63,7 @@ function Profil() {
         </section>
       </section>
 
-      <section className="Logg">
-        <h3 className="LoggOver">Loggføringer</h3>
-        <ul className="LoggUl">
-          {person.logg?.map((logg, idx) => {
-            const loggDato = logg.createdAt ? new Date(logg.createdAt).toLocaleString("no-NO") : "Ukjent dato";
-            return (
-              <li className="LoggLi" key={logg._key || idx}>
-                <strong>{loggDato}</strong>: {logg.beskrivelse}
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+      <LoggListe logg={person.logg} />
     </section>
   );
 }
